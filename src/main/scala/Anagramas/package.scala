@@ -22,7 +22,7 @@ package object Anagramas {
   }
 
   def anagramaDePalabra(pal: Palabra): List[Palabra]= {
-    diccionarioPorOcurrencias.get(lOcPal(pal)).toList.flatten
+    diccionarioPorOcurrencias.getOrElse(lOcPal(pal),Nil)
   }
 
 
