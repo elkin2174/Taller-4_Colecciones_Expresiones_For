@@ -3,7 +3,10 @@ package object Anagramas {
   type Frase = List[Palabra]
   type Occurrencias = List[(Char, Int)]
 
-  val diccionario: List[Palabra] = List("cosas", "como", "yo", "y", "ocasos", "cayo", "mocosos", "roca", "moco", "sos")
+  val diccionario: List[Palabra] = List("cosas", "como", "yo", "y", "ocasos", "cayo", "mocosos", "roca", "moco", "sos",
+    "amor",	"roma", "mora", "ramo", "omar", "sapo",	"sopa", "paso", "posa", "de", "leon", "noel", "el", "le", "de", "del",
+    "soy", "lo", "camino", "no", "solo", "amor",  "no", "sale", "amarse", "al", "sonar", "emo", "me", "ganan", "los", "dias",
+    "gnomo", "salgo", "con", "arca", "siglo", "da", "en", "semanas")
 
   def lOcPal(p: Palabra): Occurrencias = {
     (for {
@@ -22,7 +25,7 @@ package object Anagramas {
   }
 
   def anagramaDePalabra(pal: Palabra): List[Palabra]= {
-    diccionarioPorOcurrencias.getOrElse(lOcPal(pal),Nil)
+    diccionarioPorOcurrencias.getOrElse(lOcPal(pal), Nil)
   }
 
 
@@ -58,11 +61,12 @@ package object Anagramas {
           for {
             subset <- combinaciones(occs)
             palabra <- diccionarioPorOcurrencias.getOrElse(subset, Nil)
-            resto   = complemento(occs, subset)
+            resto   = complemento(subset, occs)
             anasResto <- recursion(resto)
           } yield palabra :: anasResto
     }
-    recursion(occFrase)
+
+    recursion(occFrase).distinct
   }
 
 }
