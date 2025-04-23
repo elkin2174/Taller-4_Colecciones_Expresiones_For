@@ -15,9 +15,7 @@ package object Anagramas {
   }
 
   def lOcFrase(f: Frase): Occurrencias = {
-    lOcPal((for {
-      p <- f
-    } yield p).mkString)
+    lOcPal(f.mkString)
   }
 
   lazy val diccionarioPorOcurrencias: Map[Occurrencias, List[Palabra]] = {
